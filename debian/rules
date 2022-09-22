@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/pkg-info.mk
+
+export GEM2DEB_TEST_RUNNER = --check-dependencies
+export DH_RUBY = --gem-install
+
+DEB_VERSION_UPSTREAM_STRIPPED = $(shell echo $(DEB_VERSION_UPSTREAM) | sed -e 's/+ds//g')
+
+%:
+	dh $@ --buildsystem=ruby --with ruby
+
+override_dh_installchangelogs:
+	dh_installchangelogs History.md -O--buildsystem=ruby
+
+override_dh_link:
+	dh_link usr/share/javascript/jquery-ui/jquery-ui.js usr/share/rubygems-integration/all/gems/capybara-${DEB_VERSION_UPSTREAM_STRIPPED}/lib/capybara/spec/public/jquery-ui.js \
+	        usr/share/javascript/jquery/jquery.js       usr/share/rubygems-integration/all/gems/capybara-${DEB_VERSION_UPSTREAM_STRIPPED}/lib/capybara/spec/public/jquery.js

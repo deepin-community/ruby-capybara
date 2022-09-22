@@ -1,0 +1,46 @@
+From: Daniel Leidert <dleidert@debian.org>
+Date: Wed, 17 Nov 2021 20:12:35 +0100
+Subject: Fix nomethod error
+
+Not sure why this is thrown:
+
+  1) Capybara::Session DSL #click_button should follow permanent redirects that maintain method
+     Failure/Error: pending "Rack < 2 doesn't support 308" if Gem.loaded_specs['rack'].version < Gem::Version.new('2.0.0')
+
+     NoMethodError:
+       undefined method `version' for nil:NilClass
+
+But this is a simple safeguard.
+
+Forwarded: not-needed
+---
+ spec/dsl_spec.rb       | 2 +-
+ spec/rack_test_spec.rb | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/spec/dsl_spec.rb b/spec/dsl_spec.rb
+index 4a78f60..3c34a97 100644
+--- a/spec/dsl_spec.rb
++++ b/spec/dsl_spec.rb
+@@ -14,7 +14,7 @@ Capybara::SpecHelper.run_specs TestClass.new, 'DSL', capybara_skip: %i[
+   when /has_css\? should support case insensitive :class and :id options/
+     pending "Nokogiri doesn't support case insensitive CSS attribute matchers"
+   when /#click_button should follow permanent redirects that maintain method/
+-    pending "Rack < 2 doesn't support 308" if Gem.loaded_specs['rack'].version < Gem::Version.new('2.0.0')
++    pending "Rack < 2 doesn't support 308" if Gem.loaded_specs['rack'] && Gem.loaded_specs['rack'].version < Gem::Version.new('2.0.0')
+   end
+ end
+ 
+diff --git a/spec/rack_test_spec.rb b/spec/rack_test_spec.rb
+index 24a67dd..5c8d66f 100644
+--- a/spec/rack_test_spec.rb
++++ b/spec/rack_test_spec.rb
+@@ -29,7 +29,7 @@ Capybara::SpecHelper.run_specs TestSessions::RackTest, 'RackTest', capybara_skip
+   when /has_css\? should support case insensitive :class and :id options/
+     skip "Nokogiri doesn't support case insensitive CSS attribute matchers"
+   when /#click_button should follow permanent redirects that maintain method/
+-    skip "Rack < 2 doesn't support 308" if Gem.loaded_specs['rack'].version < Gem::Version.new('2.0.0')
++    skip "Rack < 2 doesn't support 308" if Gem.loaded_specs['rack'] && Gem.loaded_specs['rack'].version < Gem::Version.new('2.0.0')
+   end
+ end
+ 

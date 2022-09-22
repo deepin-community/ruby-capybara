@@ -1,0 +1,5 @@
+Packaging notes for capybara for Debian
+=======================================
+
+The embedded code copy of jQuery and jQuery UI are stripped from the
+original source using Files-Excluded in debian/copyright.

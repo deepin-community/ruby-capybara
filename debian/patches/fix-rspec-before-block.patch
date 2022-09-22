@@ -1,0 +1,46 @@
+From: Daniel Leidert <dleidert@debian.org>
+Date: Wed, 17 Nov 2021 20:59:33 +0100
+Subject: Fix some Rspec test failures
+
+The tests actually results in
+
+  1) Capybara's feature DSL runs hooks filtered by file path
+     Failure/Error: expect(@in_filtered_hook).to be_truthy
+
+       expected: truthy value
+            got: nil
+
+For some reason the before block does not apply. I'm not exactly sure why.
+
+Forwarded: not-needed
+---
+ spec/rspec/features_spec.rb  | 2 +-
+ spec/rspec/scenarios_spec.rb | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/spec/rspec/features_spec.rb b/spec/rspec/features_spec.rb
+index edaf611..12a955d 100644
+--- a/spec/rspec/features_spec.rb
++++ b/spec/rspec/features_spec.rb
+@@ -6,7 +6,7 @@ require 'spec_helper'
+ require 'capybara/rspec'
+ 
+ # rubocop:disable RSpec/InstanceVariable
+-RSpec.configuration.before(:each, file_path: './spec/rspec/features_spec.rb') do
++RSpec.configuration.before(:each, file_path: %r{spec/rspec/features_spec.rb}) do
+   @in_filtered_hook = true
+ end
+ 
+diff --git a/spec/rspec/scenarios_spec.rb b/spec/rspec/scenarios_spec.rb
+index 5b824ec..6cf9be8 100644
+--- a/spec/rspec/scenarios_spec.rb
++++ b/spec/rspec/scenarios_spec.rb
+@@ -5,7 +5,7 @@
+ require 'spec_helper'
+ require 'capybara/rspec'
+ 
+-RSpec.configuration.before(:each, file_path: './spec/rspec/scenarios_spec.rb') do
++RSpec.configuration.before(:each, file_path: %r{spec/rspec/scenarios_spec.rb}) do
+   @in_filtered_hook = true
+ end
+ 

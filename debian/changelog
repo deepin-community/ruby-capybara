@@ -1,0 +1,137 @@
+ruby-capybara (3.36.0+ds-2) UNRELEASED; urgency=medium
+
+  * update
+
+ -- Debian Ruby Team <pkg-ruby-extras-maintainers@lists.alioth.debian.org>  Thu, 21 Jul 2022 21:29:35 -0400
+
+ruby-capybara (3.36.0+ds-2) unstable; urgency=medium
+
+  * Team upload.
+  * d/control (Build-Depends): Depend on ruby-regexp-parser >= 1.7.1-2, which
+    contains a fix for the Ruby 3 related FrozenError.
+  * d/rules: Do no longer ignore the test results.
+
+ -- Daniel Leidert <dleidert@debian.org>  Wed, 17 Nov 2021 21:53:59 +0100
+
+ruby-capybara (3.36.0+ds-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version 3.36.0.
+    - Fixes keyword argument handling (closes: #996147).
+
+  [ Utkarsh Gupta ]
+  * Refresh patches
+  * Add Selenium::WebDriver BD dependency (closes: #705739).
+  * Add myself as the uploader
+  * Fix package wrt cme
+  * Drop dependency on ruby-interpreter
+  * Add salsa-ci.yml
+
+  [ Daniel Leidert ]
+  * d/control: Add Rules-Requires-Root field.
+    (Standards-Version): Bump to 4.6.0.
+  * d/copyright: Exclude jquery files from the tarball. Add Upstream-Contact.
+    (Copyright): Add team.
+  * d/ruby-capybara.links: Remove file. Must be handled in d/rules.
+  * d/ruby-capybara.lintian-overrides: Adjust override.
+  * d/ruby-tests.rake: Update with gem2deb template.
+  * d/rules: Use gem installation layout. Ignore the test result with Ruby 3.0.
+    The tests explicitly mention to not have been tested with Ruby 3, but we
+    require this version of capybara urgently.
+    (override_dh_link): Add override to create jquery links.
+  * d/watch: Handle repackaging.
+  * d/README.Debian: Remove file. Does not apply anymore.
+  * d/README.source: Adjust hint.
+  * d/patches/0001-Remove-support-for-the-selenium-driver.patch: Remove patch.
+    The ruby-selenium-driver package is available.
+  * d/patches/0002-Inhibit-tests-for-the-selenium-driver.patch: Ditto.
+  * d/patches/0003-Inhibit-tests-that-needs-more-than-one-driver.patch: Ditto.
+  * d/patches/0004-Inhibit-test-for-SSL.patch: Update patch and
+    rename to d/patches/inhibit-test-for-SSL.patch.
+  * d/patches/fix-rack-version-nomethoderror.patch: Add patch.
+    - Prevent a NoMethodError when trying to determine the rack gem version.
+  * d/patches/remove-jquery-from-gemspec.patch: Add patch.
+    - Remove references to jquery files stripped from the source.
+  * d/patches/dont-require-selenium-statistics.patch: Add patch.
+    - Remove selenium_statistics usage as long as it is not packaged.
+  * d/patches/fix-rspec-before-block.patch: Add patch.
+    - Fix a problem with the before block not being executed.
+  * d/patches/series: Adjust file.
+  * d/upstream/metadata: Add metadata.
+
+ -- Daniel Leidert <dleidert@debian.org>  Wed, 17 Nov 2021 21:29:03 +0100
+
+ruby-capybara (3.12.0-1) unstable; urgency=medium
+
+  [ Utkarsh Gupta ]
+  * Team upload
+  * New upstream version 3.12.0
+  * Update homepage
+  * Move debian/watch to gemwatch.debian.net
+  * Bump debhelper compatibility level to 11
+  * Use salsa.debian.org in Vcs-* fields
+  * Bump Standards-Version to 4.3.0 (no changes needed)
+
+  [ Sruthi Chandran ]
+  * Add 0004-Inhibit-test-for-SSL.patch
+  * Enable autopkgtest
+
+ -- Sruthi Chandran <srud@disroot.org>  Mon, 07 Jan 2019 16:57:27 +0530
+
+ruby-capybara (2.10.2-1) unstable; urgency=medium
+
+  [ Jérémy Bobbio ]
+  * New upstream version 2.10.2.
+  * Refresh patches.
+  * Update Build-Depends and Depends.
+  * Update years in debian/copyright.
+
+  [ Cédric Boutillier ]
+  * Remove version in the gem2deb build-dependency.
+  * Use https:// in Vcs-* fields.
+  * Use https:// in Vcs-* fields.
+  * Bump Standards-Version to 3.9.7 (no changes needed).
+  * Run wrap-and-sort on packaging files.
+
+  [ Jérémy Bobbio ]
+  * Bump Standards-Version to 3.9.8, no changes required.
+
+ -- Jérémy Bobbio <lunar@debian.org>  Thu, 01 Dec 2016 00:54:49 +0100
+
+ruby-capybara (2.5.0-1) unstable; urgency=medium
+
+  * New upstream version:
+    - Add compatibility with RSpec 3. (Closes: #795029)
+  * Update git-buildpackage configuration.
+  * Refresh patches.
+  * Add a patch to inhibit tests requiring launchy.
+  * Switch to debhelper compat level 9.
+  * Update Vcs-Browser URL.
+  * Update debian/copyright.
+  * Bump Standards-Version, no changes required.
+
+ -- Jérémy Bobbio <lunar@debian.org>  Wed, 09 Sep 2015 11:53:36 +0200
+
+ruby-capybara (2.2.1-1) unstable; urgency=low
+
+  * New upstream version.
+  * Refresh patches.
+  * Restore support for all Ruby versions in the archive. (Closes: #746070)
+  * Bump Standards-Version, no changes required.
+
+ -- Jérémy Bobbio <lunar@debian.org>  Sun, 04 May 2014 13:54:54 +0200
+
+ruby-capybara (2.1.0-1) unstable; urgency=low
+
+  * New upstream version.
+  * Refresh patches against new upstream.
+  * Add a patch to avoid the need for pry to run test suite.
+  * Switch homepage to https.
+
+ -- Jérémy Bobbio <lunar@debian.org>  Fri, 28 Jun 2013 15:37:33 +0200
+
+ruby-capybara (2.0.2-1) unstable; urgency=low
+
+  * Initial release (Closes: #624610)
+
+ -- Jérémy Bobbio <lunar@debian.org>  Wed, 17 Apr 2013 11:13:05 +0200

@@ -1,0 +1,31 @@
+From: Daniel Leidert <dleidert@debian.org>
+Date: Wed, 17 Nov 2021 20:18:01 +0100
+Subject: Don't require selenium_statistics
+
+This gem has not yet been packaged and is optional.
+
+Forwarded: not-needed
+---
+ spec/spec_helper.rb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/spec/spec_helper.rb b/spec/spec_helper.rb
+index 1e6b68b..c738295 100644
+--- a/spec/spec_helper.rb
++++ b/spec/spec_helper.rb
+@@ -2,7 +2,7 @@
+ 
+ require 'rspec/expectations'
+ require 'webdrivers' if ENV['CI'] || ENV['WEBDRIVERS']
+-require 'selenium_statistics'
++#require 'selenium_statistics'
+ if ENV['TRAVIS']
+   require 'coveralls'
+   Coveralls.wear! do
+@@ -96,5 +96,5 @@ RSpec.configure do |config|
+   end
+   config.filter_run_including focus_: true unless ENV['CI']
+   config.run_all_when_everything_filtered = true
+-  config.after(:suite) { SeleniumStatistics.print_results }
++  #config.after(:suite) { SeleniumStatistics.print_results }
+ end

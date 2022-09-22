@@ -1,0 +1,5 @@
+inhibit-test-for-SSL.patch
+remove-jquery-from-gemspec.patch
+fix-rack-version-nomethoderror.patch
+dont-require-selenium-statistics.patch
+fix-rspec-before-block.patch

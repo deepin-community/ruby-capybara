@@ -1,0 +1,53 @@
+Source: ruby-capybara
+Maintainer: Debian Ruby Team <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Jérémy Bobbio <lunar@debian.org>,
+           Utkarsh Gupta <utkarsh@debian.org>
+Section: ruby
+Priority: optional
+Build-Depends: cucumber,
+               debhelper-compat (= 12),
+               gem2deb,
+               puma,
+               rake,
+               ruby-addressable,
+               ruby-erubis,
+               ruby-fuubar,
+               ruby-launchy-shim,
+               ruby-mini-mime,
+               ruby-nokogiri (>= 1.8~),
+               ruby-rack (>= 1.6~),
+               ruby-rack-test (>= 0.6.3~),
+               ruby-regexp-parser (>= 1.7.1-2~),
+               ruby-rspec,
+               ruby-selenium-webdriver,
+               ruby-sinatra,
+               ruby-xpath (>= 3.2~),
+               yard
+Standards-Version: 4.6.0
+Vcs-Browser: https://salsa.debian.org/ruby-team/ruby-capybara
+Vcs-Git: https://salsa.debian.org/ruby-team/ruby-capybara.git
+Homepage: https://github.com/teamcapybara/capybara
+Testsuite: autopkgtest-pkg-ruby
+XS-Ruby-Versions: all
+Rules-Requires-Root: no
+
+Package: ruby-capybara
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: libjs-jquery,
+         libjs-jquery-ui,
+         ruby-addressable,
+         ruby-mini-mime,
+         ruby-nokogiri (>= 1.8~),
+         ruby-rack (>= 1.6~),
+         ruby-rack-test (>= 0.6.3~),
+         ruby-regexp-parser,
+         ruby-xpath (>= 3.2~),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Suggests: ruby-launchy
+Description: integration testing tool for Rack based web applications
+ Capybara helps to test web applications based on Rack (such
+ as the ones using Rails or Sinatra). It simulates how a real user would
+ interact with the application. Multiple test drivers are supported
+ Rack::Test comes built-in but other drivers can be added separately.
